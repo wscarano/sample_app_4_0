@@ -114,7 +114,7 @@ describe "User pages" do
 			describe "after submission" do
 				before { click_button submit }
 
-				it { should have_selector('title', text: 'Sign up') }
+				it { should have_title('Sign up') }
 				it { should have_content('error') }
 				it { should_not have_content('Password digest') }
 			end
@@ -136,7 +136,7 @@ describe "User pages" do
 				before { click_button submit }
 
 				let(:user) { User.find_by_email('user@example.com') }
-				it { should have_selector('title', text: user.name) }
+				it { should have_title(user.name) }
 				it { should have_selector('div.alert.alert-success', text: 'Welcome') }
 				it { should have_link('Sign out') }
 			end
@@ -172,7 +172,7 @@ describe "User pages" do
 				click_button "Save changes"
 			end
 
-			it { should have_selector('title', text: new_name) }
+			it { should have_title(new_name) }
 			it { should have_selector('div.alert.alert-success')}
 			it { should have_link('Sign out', href: signout_path)}
 			specify { user.reload.name.should == new_name }
@@ -191,7 +191,7 @@ describe "User pages" do
 				visit following_user_path(user)
 			end
 
-			it { should have_selector('title', text: full_title('Following')) }
+			it { should have_title(full_title('Following')) }
 			it { should have_selector('h3',    text: 'Following') }
 			it { should have_link(other_user.name, href: user_path(other_user)) }
 		end
@@ -202,7 +202,7 @@ describe "User pages" do
 				visit followers_user_path(other_user)
 			end
 
-			it { should have_selector('title', text: full_title('Followers')) }
+			it { should have_title(full_title('Followers')) }
 			it { should have_selector('h3', text: 'Followers') }
 			it { should have_link(user.name, href: user_path(user)) }
 		end
