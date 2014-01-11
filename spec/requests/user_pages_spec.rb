@@ -52,8 +52,8 @@ describe "User pages" do
 	describe "signup page" do
 		before { visit signup_path }
 
-    	it { should have_selector('h1', 	text: 'Sign up') }
-    	it { should have_selector('title', 	text: 'Sign up') }
+    	it { should have_selector('h1',    text: 'Sign up') }
+    	it { should have_title('Sign up') }
    	end
 
 	describe "profile page" do
@@ -64,7 +64,7 @@ describe "User pages" do
 		before { visit user_path(user) }
 
 		it { should have_selector('h1', 	text: user.name) }
-		it { should have_selector('title', 	text: user.name) }
+		it { should have_title(user.name) }
 
 		describe "microposts" do
 			it { should have_content(m1.content) }
@@ -93,7 +93,7 @@ describe "User pages" do
 
 				describe "toggling the button" do
 					before { click_button "Follow" }
-					it { should have_selector('input', value: 'Unfollow') }
+					it { should have_xpath("//input[@value='Unfollow']") }
 				end
 			end
 			
@@ -152,7 +152,7 @@ describe "User pages" do
 
 		describe "page" do
 			it { should have_selector('h1',     text: "Update your profile" ) }
-			it { should have_selector('title',  text: "Edit user") }
+			it { should have_title("Edit user") }
 			it { should have_link('change',     href: 'http://gravatar.com/emails')}
 		end
 
