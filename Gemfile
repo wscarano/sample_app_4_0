@@ -55,4 +55,4 @@ group :production do
 end
 
 # to be removed when using strong parameters
-gem 'protected_attributes'
+# gem 'protected_attributes'
