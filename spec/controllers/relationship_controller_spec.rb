@@ -5,7 +5,7 @@ describe RelationshipsController do
 	let(:user) { FactoryGirl.create(:user) }
 	let(:other_user) { FactoryGirl.create(:user) }
 
-	before { sign_in user }
+	before { sign_in user, no_capybara: true }
 
 	describe "creating a relationship with Ajax" do
 
@@ -17,7 +17,7 @@ describe RelationshipsController do
 
 		it "should respond with success" do
 			xhr :post, :create, relationship: { followed_id: other_user.id }
-			response.should be_success
+			expect(response).to be_success
 		end	
 	end
 
@@ -34,7 +34,7 @@ describe RelationshipsController do
 
 		it "should respond with success" do
 			xhr :delete, :destroy, id: relationship.id
-			response.should be_success
+			expect(response).to be_success
 		end
 	end
 end
